@@ -96,20 +96,6 @@ public class BadLighting : MonoBehaviour
         }
     }
 
-    public void Fv()
-    {
-        for (int i = 0; i < SelectedList.Count; i++)
-        {
-            if (i == 4)
-            {
-                i = 0;
-            }
-            IsLight = SelectedList[i];
-            SetCompoent(IsLight);
-            new WaitForSeconds(1);
-        }
-    }
-
     IEnumerator HideUnhide()
     {
         int i = 0;

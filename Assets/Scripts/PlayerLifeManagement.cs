@@ -10,17 +10,11 @@ public class PlayerLifeManagement : MonoBehaviour
 
     void Start()
     {
-        NumberOfLives = 100f;
+        NumberOfLives = 500f;
         InLive = true;
-        //InLight;
-
-    }
-    public void SetInLight(bool bennvan)
-    {
-        InLight = bennvan;
+        InLight = true;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         checkLive();
@@ -33,6 +27,13 @@ public class PlayerLifeManagement : MonoBehaviour
             DecreaseLiveAmount();
         }
     }
+
+    public void SetInLight(bool bennvan)
+    {
+        InLight = bennvan;
+    }
+
+    
 
     public bool checkLive()
     {
@@ -62,5 +63,6 @@ public class PlayerLifeManagement : MonoBehaviour
     public void GameOver()
     {
         Debug.Log("GAME OVER!");
+        // TODO: CANT MOVE CALL ANIMATOR
     }
 }
