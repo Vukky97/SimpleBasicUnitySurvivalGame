@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class PlayerLifeManagement : MonoBehaviour
 {
-    int NumberOfLives;
+    float NumberOfLives;
     bool InLive;
     bool InLight;
 
     void Start()
     {
-        NumberOfLives = 100;
+        NumberOfLives = 100f;
         InLive = true;
         //InLight;
 
@@ -26,12 +26,11 @@ public class PlayerLifeManagement : MonoBehaviour
         checkLive();
         if (InLight)
         {
-            
+            DontDecreaseLiveAmount();
         }
         else if (!InLight)
         {
-            NumberOfLives -= (int)Time.time;
-            //Debug.Log((int)Time.time);
+            DecreaseLiveAmount();
         }
     }
 
@@ -48,7 +47,16 @@ public class PlayerLifeManagement : MonoBehaviour
     public void DecreaseLiveAmount()
     {
         //Debug.Log("TenylegKiment");
-        NumberOfLives -= (int)Time.smoothDeltaTime *10;
+        //NumberOfLives -= (float)Time.timeScale / 50;
+        //Debug.Log("NumberOfLives:" + NumberOfLives + "Minus time" + (float)Time.time + "Equals to" + (NumberOfLives -= (float)Time.time));
+        NumberOfLives--;
+        //Debug.Log("NumberOfLives:" + NumberOfLives);
+
+    }
+    public void DontDecreaseLiveAmount()
+    {
+        //Debug.Log("TenylegKiment");
+        Debug.Log("NumberOfLives:" + NumberOfLives);
     }
 
     public void GameOver()

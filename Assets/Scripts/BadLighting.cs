@@ -10,6 +10,7 @@ public class BadLighting : MonoBehaviour
     private List<bool> LightListVariantThird = new List<bool>() { false, false, true, false, true };
     private List<bool> LightListVariantFourth = new List<bool>() { true, true, true, false, false };
     private List<bool> LightListVariantFift= new List<bool>() { false, true, false, false, true };
+
     //private List<List<bool>> LightLists = new List<List<bool>>() {
     // new List<bool>(){ false, true, false, true, false },
     // new List<bool>() { false, false, false, true, true },
@@ -23,8 +24,12 @@ public class BadLighting : MonoBehaviour
     //public GameObject BadLampy;
     public SpriteRenderer spriteRenderer;
 
+    public float LighFrequency;
+
     void Start()
     {
+        LighFrequency = Random.Range(0.7f, 1.3f);
+
         int SelectLightListOnRandom = Random.Range(0, 4);
         switch(SelectLightListOnRandom){
             case 0:
@@ -113,7 +118,7 @@ public class BadLighting : MonoBehaviour
             IsLight = SelectedList[i];
             SetCompoent(IsLight);
             i++;
-            yield return (new WaitForSeconds(1));
+            yield return (new WaitForSeconds(LighFrequency));
 
             //yield return (new WaitForSeconds(1));
             //spriteRenderer.enabled = true;

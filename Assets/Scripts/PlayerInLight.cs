@@ -6,13 +6,11 @@ public class PlayerInLight : MonoBehaviour
 {
     [SerializeField] PlayerLifeManagement playerLifeManagement = null;
 
-    // Start is called before the first frame update
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -21,6 +19,7 @@ public class PlayerInLight : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            PlayerUnderLight();
             //Debug.Log("Player enter in the light area!");
         }
     }
@@ -28,6 +27,7 @@ public class PlayerInLight : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
+            PlayerUnderLight();
             //Debug.Log("Player stay in light area!");
         }
     }
@@ -42,6 +42,12 @@ public class PlayerInLight : MonoBehaviour
     }
     public void PlayerOutOfLight()
     {
-        playerLifeManagement.DecreaseLiveAmount();
+        playerLifeManagement.SetInLight(false);
+        //playerLifeManagement.DecreaseLiveAmount();
     }
+    public void PlayerUnderLight()
+    {
+        playerLifeManagement.SetInLight(true);
+    }
+
 }
