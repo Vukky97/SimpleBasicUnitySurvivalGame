@@ -1,31 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerLifeManagement : MonoBehaviour
 {
-    float NumberOfLives;
+    private static float NumberOfLives;
     bool InLive;
     bool InLight;
 
+    public float GetLiveNumber()
+    {
+        return NumberOfLives;
+    }
+
+    //public void SetLiveNumber(float num)
+    //{
+    //    NumberOfLives = num;
+    //}
+
+    public void MinusLife(int num)
+    {
+        NumberOfLives -= num;
+    }
+
     void Start()
     {
-        NumberOfLives = 500f;
+        NumberOfLives = 200f;
         InLive = true;
         InLight = true;
+        StartCoroutine("checkPlayerIsLive");
+        StartCoroutine("ChangeAmountOfLives");
     }
 
     void FixedUpdate()
-    {
-        checkLive();
-        if (InLight)
-        {
-            DontDecreaseLiveAmount();
-        }
-        else if (!InLight)
-        {
-            DecreaseLiveAmount();
-        }
+    {      
+        //checkLive();
+        //Debug.Log(NumberOfLives);
+        //if (InLight)
+        //{
+        //    DontDecreaseLiveAmount();
+        //}
+        //else if (!InLight)
+        //{
+        //    DecreaseLiveAmount();
+        //}
     }
 
     public void SetInLight(bool bennvan)
@@ -35,34 +54,67 @@ public class PlayerLifeManagement : MonoBehaviour
 
     
 
-    public bool checkLive()
-    {
-        if(NumberOfLives <= 0)
-        {
-            GameOver();
-            return false;
-        }
-        return true;
-    }
+    //public bool checkLive()
+    //{
+    //    if(NumberOfLives <= 0)
+    //    {
+    //        GameOver();
+    //        return false;
+    //    }
+    //    return true;
+    //}
 
-    public void DecreaseLiveAmount()
+    public void DecreaseLiveAmount(int num)
     {
         //Debug.Log("TenylegKiment");
         //NumberOfLives -= (float)Time.timeScale / 50;
         //Debug.Log("NumberOfLives:" + NumberOfLives + "Minus time" + (float)Time.time + "Equals to" + (NumberOfLives -= (float)Time.time));
-        NumberOfLives--;
+        NumberOfLives -= num;
         //Debug.Log("NumberOfLives:" + NumberOfLives);
 
     }
+
     public void DontDecreaseLiveAmount()
     {
-        //Debug.Log("TenylegKiment");
-        Debug.Log("NumberOfLives:" + NumberOfLives);
+        //NumberOfLives++;
+        //Debug.Log("NumberOfLives:" + NumberOfLives);
+    }
+
+    IEnumerator checkPlayerIsLive()
+    {
+        while (true)
+        {
+
+            if (NumberOfLives <= 0)
+            {
+                GameOver();
+            }
+            yield return (new WaitForSeconds(0.20f));
+        }
+    }
+
+    IEnumerator ChangeAmountOfLives()
+    {
+        while (true)
+        {
+            Debug.Log(NumberOfLives);
+            if (InLight)
+            {
+                DontDecreaseLiveAmount();
+            }
+            else if (!InLight)
+            {
+                DecreaseLiveAmount(1);
+            }
+            yield return (new WaitForSeconds(0.20f));
+        }
     }
 
     public void GameOver()
     {
         Debug.Log("GAME OVER!");
-        // TODO: CANT MOVE CALL ANIMATOR
+
     }
+
+  
 }
